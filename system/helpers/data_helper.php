@@ -48,6 +48,14 @@ function interpolate( $min, $max, $ratio ) {
       return ( $min + ($max - $min / $ratio == 0 ? 1 : $ratio ) );	
    }
 }
+
+if(!function_exists('interpolate'))
+{
+	function is_ajax() 
+	{
+		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+	}
+}
    
 
 /*
