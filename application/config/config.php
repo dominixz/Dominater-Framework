@@ -173,7 +173,7 @@ $config['directory_trigger'] 	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 2;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,7 +184,7 @@ $config['log_threshold'] = 0;
 | system/logs/ folder.  Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = 'applcation/logs/';
 
 /*
 |--------------------------------------------------------------------------
@@ -206,7 +206,7 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 | system/cache/ folder.  Use a full server path with trailing slash.
 |
 */
-$config['cache_path'] = '';
+$config['cache_path'] = 'application/cache/';
 
 /*
 |--------------------------------------------------------------------------
@@ -231,11 +231,11 @@ $config['encryption_key'] = "";
 | 'time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'ci_session';
+$config['sess_cookie_name']		= 'dm_session';
 $config['sess_expiration']		= 7200;
-$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
-$config['sess_table_name']		= 'ci_sessions';
+$config['sess_table_name']		= 'dm_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update'] 	= 300;
