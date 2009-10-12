@@ -231,7 +231,7 @@ $config['encryption_key'] = "";
 | 'time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'dm_session';
+$config['sess_cookie_name']		= 'dmsession';
 $config['sess_expiration']		= 7200;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
