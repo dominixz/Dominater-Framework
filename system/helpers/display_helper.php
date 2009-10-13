@@ -135,5 +135,51 @@ function set_flash($name, $type, $msg)
 	$CI->session->set_flashdata($name, array('type' => $type, 'msg' => $msg));
 }
 
+/** 
+* Display Combined Javascript
+*
+*/ 
+
+function display_js($js_files)
+{
+	$ci =& get_instance();
+	$js_files = explode(",",$js_files);
+	
+	if(empty($js_files))
+	{
+		return null;
+	}
+	
+	foreach($js_files as $js)
+	{
+		$ci->carabiner->js("$js.js");
+	}
+	
+	return $ci->carabiner->display('js');
+}
+
+/** 
+* Display Combined CSS
+*
+*/ 
+
+function display_css($css_files,$media="screen")
+{
+	$ci =& get_instance();
+	$css_files = explode(",",$css_files);
+	
+	if(empty($css_files))
+	{
+		return null;
+	}
+	
+	foreach($css_files as $css)
+	{
+		$ci->carabiner->css("$css.css",$media);
+	}
+	
+	return $ci->carabiner->display('css');
+}
+
 /* End of file display_helper.php */ 
 /* Location: ./application/helpers/display_helper.php */ 
