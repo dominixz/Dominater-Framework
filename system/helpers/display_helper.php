@@ -140,7 +140,7 @@ function set_flash($name, $type, $msg)
 *
 */ 
 
-function display_js($js_files)
+function display_js($js_files,$force_empty = false)
 {
 	$ci =& get_instance();
 	$js_files = explode(",",$js_files);
@@ -150,9 +150,16 @@ function display_js($js_files)
 		return null;
 	}
 	
+	if($force_empty)
+	{
+		$ci->carabiner->empty_cache('js');
+	}
+	
 	foreach($js_files as $js)
 	{
-		$ci->carabiner->js("$js.js");
+		$extension = (pathinfo($js,PATHINFO_EXTENSION) == 'js')?'':'.js';
+		
+		$ci->carabiner->js($js.$extension);
 	}
 	
 	return $ci->carabiner->display('js');
@@ -163,10 +170,15 @@ function display_js($js_files)
 *
 */ 
 
-function display_css($css_files,$media="screen")
+function display_css($css_files,$media="screen",$force_empty=false)
 {
 	$ci =& get_instance();
 	$css_files = explode(",",$css_files);
+	
+	if($force_empty)
+	{
+		$ci->carabiner->empty_cache('css');
+	}
 	
 	if(empty($css_files))
 	{
@@ -175,7 +187,10 @@ function display_css($css_files,$media="screen")
 	
 	foreach($css_files as $css)
 	{
-		$ci->carabiner->css("$css.css",$media);
+		
+		$extension = (pathinfo($css,PATHINFO_EXTENSION) == 'css')?'':'.css';
+		
+		$ci->carabiner->css($css.$extension,$media);
 	}
 	
 	return $ci->carabiner->display('css');
