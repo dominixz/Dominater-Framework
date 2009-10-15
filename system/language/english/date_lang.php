@@ -14,6 +14,10 @@ $lang['date_minute'] = "Minute";
 $lang['date_minutes'] = "Minutes";
 $lang['date_second'] = "Second";
 $lang['date_seconds'] = "Seconds";
+$lang['date_decade'] = "Decade";
+$lang['date_decades'] = "Decades";
+$lang['date_ago']    = "ago";
+$lang['date_to_go']    = "to go"; 
 
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
