@@ -14,7 +14,7 @@ $hook['post_controller'] = array(
                                 'class'    => 'Template',
                                 'function' => 'response',
                                 'filename' => 'Template.php',
-                                'filepath' => 'libraries'
+                                'filepath' => '../system/libraries'
 );
 
 /* End of file hooks.php */

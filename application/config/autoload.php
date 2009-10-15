@@ -79,7 +79,7 @@ $autoload['plugin'] = array('is_ajax');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('themes');
 
 
 /*
