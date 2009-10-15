@@ -47,7 +47,7 @@ class Setup extends DM_Controller {
 	function _autoload()
 	{
 		$autoload_path = APPPATH.'config/autoload.php';
-		$this->_replaceFileContent($autoload_path,array("\$autoload['libraries'] = array();" => "\$autoload['libraries'] = array('database','datamapper','session','carabiner');"));
+		$this->_replaceFileContent($autoload_path,array("\$autoload['libraries'] = array();" => "\$autoload['libraries'] = array('database','datamapper','session','carabiner','template');"));
 		echo "Change Autoload Completed<br/>";
 	}
 	
