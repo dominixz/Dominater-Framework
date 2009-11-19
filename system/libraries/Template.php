@@ -16,12 +16,11 @@ class Template {
 	// load a default template 'template.php'
 	function view($view = '' , $view_data = array(), $return = FALSE) {
 		$this->CI =& get_instance();
-		$template_dir = $this->CI->config->item('dir');
-		$template_default = $this->CI->config->item('default');
-		$template = "$template_dir/$template_default";
+		$template = $this->CI->config->item('template');
+		$template_path = "{$template['dir']}{$template['default']}";
 		
 		$this->set('contents', $this->CI->load->view($view, $view_data, TRUE));
-		return $this->CI->load->view($template, $this->template_data, $return);
+		return $this->CI->load->view($template_path, $this->template_data, $return);
 	}
 }
 
