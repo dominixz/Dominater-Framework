@@ -10,12 +10,5 @@
 |
 */
 
-$hook['post_controller'] = array(
-                                'class'    => 'Template',
-                                'function' => 'response',
-                                'filename' => 'Template.php',
-                                'filepath' => '../system/libraries'
-);
-
 /* End of file hooks.php */
 /* Location: ./system/application/config/hooks.php */
