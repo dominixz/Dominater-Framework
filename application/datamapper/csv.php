@@ -6,9 +6,10 @@
  * Quickly import and export a set of DataMapper models to-and-from CSV files.
  *
  * @license 	MIT License
- * @category	DataMapper Extensions
+ * @package		DMZ-Included-Extensions
+ * @category	DMZ
  * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @link    	http://www.overzealous.com/dmz/pages/extensions/csv.html
  * @version 	1.0
  */
 
@@ -16,16 +17,19 @@
 
 /**
  * DMZ_CSV Class
+ *
+ * @package		DMZ-Included-Extensions
  */
 class DMZ_CSV {
 	
 	/**
 	 * Convert a DataMapper model into an associative array.
 	 * 
-	 * @param object $object The DataMapper Object to export
-	 * @param mixed filename The filename to export to, or a file pointer. If this is a file pointer, it will not be closed.
-	 * @param array $fields[optional] Array of fields to include.  If empty, includes all database columns.
-	 * @return TRUE on success, or FALSE on failure.
+	 * @param	DataMapper $object The DataMapper Object to export
+	 * @param	mixed filename The filename to export to, or a file pointer. If this is a file pointer, it will not be closed.
+	 * @param	array $fields Array of fields to include.  If empty, includes all database columns.
+	 * @param	bool $include_header If FALSE the header is not exported with the CSV. Not recommended if planning to import this data.
+	 * @return	bool TRUE on success, or FALSE on failure.
 	 */
 	function csv_export($object, $filename, $fields = '', $include_header = TRUE)
 	{
@@ -62,7 +66,7 @@ class DMZ_CSV {
 		
 		if($success)
 		{
-			foreach($object->all as $o)
+			foreach($object as $o)
 			{
 				// convert each object into an array
 				$result = array();
@@ -94,14 +98,12 @@ class DMZ_CSV {
 	 * Completely empty rows are automatically skipped, as are rows that
 	 * start with a # sign (assumed to be comments).
 	 * 
-	 * @param object $object The type of DataMapper Object to import
-	 * @param mixed $filename Name of CSV file.
-	 * @param array $fields [optional] If empty, the database fields are used.  Otherwise used to limit what fields are saved.
-	 * @param boolean $header_row [optional] If true, the first line is assumed to be a header row.  Defaults to true.
-	 * @param object $auto_save [optional] If true, each object will automatically be saved.
-	 * 										You should still check each object for errors.
-	 * 										The result of the save is stored as $result[$index]->csv_import_result
-	 * @return Array of imported objects, or FALSE if unable to import.
+	 * @param	DataMapper $object The type of DataMapper Object to import
+	 * @param	mixed $filename Name of CSV file, or a file pointer.
+	 * @param	array $fields If empty, the database fields are used.  Otherwise used to limit what fields are saved.
+	 * @param	boolean $header_row If true, the first line is assumed to be a header row.  Defaults to true.
+	 * @param	mixed $callback A callback method for each row.  Can return FALSE on failure to save, or 'stop' to stop the import.
+	 * @return	array Array of imported objects, or FALSE if unable to import.
 	 */
 	function csv_import($object, $filename, $fields = '', $header_row = TRUE, $callback = NULL)
 	{

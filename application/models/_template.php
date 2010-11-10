@@ -26,6 +26,9 @@ class Template extends DataMapper {
 	// var $model = 'template';
 	// var $table = 'templates';
 	
+	// You can override the database connections with this option
+	// var $db_params = 'db_config_name';
+	
 	// --------------------------------------------------------------------
 	// Relationships
 	//   Configure your relationships below

@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class DM_Controller extends Controller {
+
 	function DM_Controller()
 	{
 		parent::Controller();

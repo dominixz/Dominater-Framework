@@ -6,9 +6,10 @@
  * Allows the usage of CodeIgniter query caching on DataMapper queries.
  *
  * @license 	MIT License
- * @category	DataMapper Extensions
+ * @package		DMZ-Included-Extensions
+ * @category	DMZ
  * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @link    	http://www.overzealous.com/dmz/pages/extensions/simplecache.html
  * @version 	1.0
  */
 
@@ -16,6 +17,8 @@
 
 /**
  * DMZ_SimpleCache Class
+ *
+ * @package		DMZ-Included-Extensions
  */
 class DMZ_SimpleCache {
 	
@@ -23,8 +26,8 @@ class DMZ_SimpleCache {
 	 * Allows CodeIgniter's caching method to cache large result sets.
 	 * Call it exactly as get();
 	 * 
-	 * @return The DataMapper $object for chaining.
-	 * @param object $object The DataMapper Object.
+	 * @param	DataMapper $object The DataMapper Object.
+	 * @return	DataMapper The DataMapper object for chaining.
 	 */
     function get_cached($object)
 	{
@@ -46,8 +49,8 @@ class DMZ_SimpleCache {
     /**
      * Clears the cached query the next time get_cached is called.
      * 
-     * @return  The DataMapper $object for chaining.
-     * @param object $object The DataMapper Object.
+     * @param	DataMapper $object The DataMapper Object.
+     * @return	DataMapper The DataMapper $object for chaining.
      */
     function clear_cache($object)
 	{

@@ -8,9 +8,10 @@
  * generate standardized forms off a DMZ object.
  *
  * @license 	MIT License
- * @category	DataMapper Extensions
+ * @package		DMZ-Included-Extensions
+ * @category	DMZ
  * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @link    	http://www.overzealous.com/dmz/pages/extensions/htmlform.html
  * @version 	1.0
  */
 
@@ -18,6 +19,8 @@
 
 /**
  * DMZ_HTMLForm Class
+ *
+ * @package		DMZ-Included-Extensions
  */
 class DMZ_HTMLForm {
 	
@@ -61,8 +64,8 @@ class DMZ_HTMLForm {
 	 * 
 	 * @param object $object The DataMapper Object to use.
 	 * @param string $field The field to render.
-	 * @param string $type [optional] The type of field to render.
-	 * @param array  $options [optional] Various options to modify the output.
+	 * @param string $type  The type of field to render.
+	 * @param array  $options  Various options to modify the output.
 	 * @return Rendered String.
 	 */
 	function render_field($object, $field, $type = NULL, $options = NULL)
@@ -94,7 +97,7 @@ class DMZ_HTMLForm {
 					{
 						// save what might be multiple values
 						$value = array();
-						foreach($sel->all as $s)
+						foreach($sel as $s)
 						{
 							$value[] = $s->id;
 						}
@@ -126,7 +129,7 @@ class DMZ_HTMLForm {
 					else
 					{
 						// Get all items
-						$total_items->get();
+						$total_items->get_iterated();
 					}
 				}
 				else
@@ -135,7 +138,7 @@ class DMZ_HTMLForm {
 					$total_items = $options['list'];
 				}
 				$list = array();
-				foreach($total_items->all as $item)
+				foreach($total_items as $item)
 				{
 					// use the __toString value of the item for the label
 					$list[$item->id] = (string)$item;
@@ -271,9 +274,9 @@ class DMZ_HTMLForm {
 	 * 
 	 * @param object $object The DataMapper Object to use.
 	 * @param string $field The field to render (or content)
-	 * @param string $type [optional] The type of field to render.
-	 * @param array  $options [optional] Various options to modify the output.
-	 * @param string $row_template [optional] The template to use, or NULL to use the default.
+	 * @param string $type  The type of field to render.
+	 * @param array  $options  Various options to modify the output.
+	 * @param string $row_template  The template to use, or NULL to use the default.
 	 * @return Rendered String.
 	 */
 	function render_row($object, $field, $type = NULL, $options = array(), $row_template = NULL)
@@ -359,9 +362,9 @@ class DMZ_HTMLForm {
 	 * 
 	 * @param object $object The DataMapper Object to use.
 	 * @param string $fields An associative array that defines the form.
-	 * @param string $template [optional] The template to use.
-	 * @param string $row_template [optional] The template to use for rows.
-	 * @param array  $template_options [optional] The template to use for rows.
+	 * @param string $template  The template to use.
+	 * @param string $row_template  The template to use for rows.
+	 * @param array  $template_options  The template to use for rows.
 	 * @return Rendered String.
 	 */
 	function render_form($object, $fields, $url = '', $options = array(), $template = NULL, $row_template = NULL)

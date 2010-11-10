@@ -6,9 +6,10 @@
  * Quickly convert DataMapper models to-and-from PHP arrays.
  *
  * @license 	MIT License
- * @category	DataMapper Extensions
+ * @package		DMZ-Included-Extensions
+ * @category	DMZ
  * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @link    	http://www.overzealous.com/dmz/pages/extensions/array.html
  * @version 	1.0
  */
 
@@ -16,15 +17,20 @@
 
 /**
  * DMZ_Array Class
+ *
+ * @package		DMZ-Included-Extensions
  */
 class DMZ_Array {
 	
 	/**
 	 * Convert a DataMapper model into an associative array.
+	 * If the specified fields includes a related object, the ids from the
+	 * objects are collected into an array and stored on that key.
+	 * This method does not recursively add objects.
 	 * 
-	 * @return An associative array.
-	 * @param object $object The DataMapper Object to convert
-	 * @param array $fields[optional] Array of fields to include.  If empty, includes all database columns.
+	 * @param	DataMapper $object The DataMapper Object to convert
+	 * @param	array $fields Array of fields to include.  If empty, includes all database columns.
+	 * @return	array An associative array of the requested fields and related object ids.
 	 */
 	function to_array($object, $fields = '')
 	{
@@ -44,7 +50,7 @@ class DMZ_Array {
 				// each related item is stored as an array of ids
 				// Note: this method will NOT get() the related object.
 				$rels = array();
-				foreach($object->{$f}->all as $item)
+				foreach($object->{$f} as $item)
 				{
 					$rels[] = $item->id;
 				}
@@ -61,18 +67,20 @@ class DMZ_Array {
 	}
 	
 	/**
-	 * Convert the entire $object->all array result set into an array of associative arrays.
-	 * 
-	 * @return An array of associative arrays.
-	 * @param object $object The DataMapper Object to convert
-	 * @param array $fields[optional] Array of fields to include.  If empty, includes all database columns.
+	 * Convert the entire $object->all array result set into an array of
+	 * associative arrays.
+	 *
+	 * @see		to_array
+	 * @param	DataMapper $object The DataMapper Object to convert
+	 * @param	array $fields Array of fields to include.  If empty, includes all database columns.
+	 * @return	array An array of associative arrays.
 	 */
 	function all_to_array($object, $fields = '')
 	{
 		// loop through each object in the $all array, convert them to
 		// an array, and add them to a new array.
 		$result = array();
-		foreach($object->all as $o)
+		foreach($object as $o)
 		{
 			$result[] = $o->to_array($fields);
 		}
@@ -84,10 +92,11 @@ class DMZ_Array {
 	 * 
 	 * If $fields is provided, missing fields are assumed to be empty checkboxes.
 	 * 
-	 * @return A list of newly related objects, or the result of the save if $save is TRUE
-	 * @param object $object The DataMapper Object to save to.
-	 * @param string $data A an associative array of fields to convert.
-	 * @param array $fields[optional] Array of 'safe' fields.  If empty, only includes the database columns.
+	 * @param	DataMapper $object The DataMapper Object to save to.
+	 * @param	array $data A an associative array of fields to convert.
+	 * @param	array $fields Array of 'safe' fields.  If empty, only includes the database columns.
+	 * @param	bool $save If TRUE, then attempt to save the object automatically.
+	 * @return	array|bool A list of newly related objects, or the result of the save if $save is TRUE
 	 */
 	function from_array($object, $data, $fields = '', $save = FALSE)
 	{

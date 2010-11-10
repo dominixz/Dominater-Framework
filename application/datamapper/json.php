@@ -6,9 +6,10 @@
  * Quickly convert DataMapper models to-and-from JSON syntax.
  *
  * @license 	MIT License
- * @category	DataMapper Extensions
+ * @package		DMZ-Included-Extensions
+ * @category	DMZ
  * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @link    	http://www.overzealous.com/dmz/pages/extensions/json.html
  * @version 	1.1
  */
 
@@ -16,18 +17,20 @@
 
 /**
  * DMZ_Json Class
+ *
+ * @package		DMZ-Included-Extensions
  */
 class DMZ_Json {
 	
 	/**
 	 * Convert a DataMapper model into JSON code.
 	 * 
-	 * @return A JSON formatted String, or FALSE if an error occurs.
-	 * @param object $object The DataMapper Object to convert
-	 * @param array $fields[optional] Array of fields to include.  If empty, includes all database columns.
-	 * @param boolean $pretty_print[optional] Format the JSON code for legibility.
+	 * @param	DataMapper $object The DataMapper Object to convert
+	 * @param	array $fields Array of fields to include.  If empty, includes all database columns.
+	 * @param	boolean $pretty_print Format the JSON code for legibility.
+	 * @return	string A JSON formatted String, or FALSE if an error occurs.
 	 */
-	function to_json($object, $fields = '', $pretty_print = FALSE)
+	public function to_json($object, $fields = '', $pretty_print = FALSE)
 	{
 		if(empty($fields))
 		{
@@ -53,19 +56,19 @@ class DMZ_Json {
 	/**
 	 * Convert the entire $object->all array result set into JSON code.
 	 * 
-	 * @return A JSON formatted String, or FALSE if an error occurs.
-	 * @param object $object The DataMapper Object to convert
-	 * @param array $fields[optional] Array of fields to include.  If empty, includes all database columns.
-	 * @param boolean $pretty_print[optional] Format the JSON code for legibility.
+	 * @param	DataMapper $object The DataMapper Object to convert
+	 * @param	array $fields Array of fields to include.  If empty, includes all database columns.
+	 * @param	boolean $pretty_print Format the JSON code for legibility.
+	 * @return	string A JSON formatted String, or FALSE if an error occurs.
 	 */
-	function all_to_json($object, $fields = '', $pretty_print = FALSE)
+	public function all_to_json($object, $fields = '', $pretty_print = FALSE)
 	{
 		if(empty($fields))
 		{
 			$fields = $object->fields;
 		}
 		$result = array();
-		foreach($object->all as $o)
+		foreach($object as $o)
 		{
 			$temp = array();
 			foreach($fields as $f)
@@ -89,12 +92,12 @@ class DMZ_Json {
 	/**
 	 * Convert a JSON object back into a DataMapper model.
 	 * 
-	 * @return TRUE or FALSE on success or failure of converting the JSON string..
-	 * @param object $object The DataMapper Object to save to.
-	 * @param string $json_code A string that contains JSON code.
-	 * @param array $fields[optional] Array of 'safe' fields.  If empty, only include the database columns.
+	 * @param	DataMapper $object The DataMapper Object to save to.
+	 * @param	string $json_code A string that contains JSON code.
+	 * @param	array $fields Array of 'safe' fields.  If empty, only include the database columns.
+	 * @return	bool TRUE or FALSE on success or failure of converting the JSON string.
 	 */
-	function from_json($object, $json_code, $fields = '')
+	public function from_json($object, $json_code, $fields = '')
 	{
 		if(empty($fields))
 		{
@@ -116,15 +119,24 @@ class DMZ_Json {
 	
 	/**
 	 * Sets the HTTP Content-Type header to application/json
+	 *
+	 * @param	DataMapper $object
 	 */
-	function set_json_content_type($object)
+	public function set_json_content_type($object)
 	{
 		$CI =& get_instance();
 		$CI->output->set_header('Content-Type: application/json');
 	}
 	
-	// Pretty print some JSON
-	function _json_format($json)
+	/**
+	 * Formats a JSON string for readability.
+	 *
+	 * From @link http://php.net/manual/en/function.json-encode.php
+	 * 
+	 * @param string $json Unformatted JSON
+	 * @return string Formatted JSON
+	 */
+	private function _json_format($json)
 	{
 		$tab = "  ";
 		$new_json = "";
